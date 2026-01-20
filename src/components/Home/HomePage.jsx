@@ -6,9 +6,14 @@ import Dock from "./Dock"
 import Items from "./Items"
 
 const HomePage = () => {
+
+    const userLocationData = () => {
+
+    }
+    
     return (
         <>
-            <LocationBox></LocationBox>
+            <LocationBox data={location} triggerLocation={userLocationData}></LocationBox>
             <SearchBox></SearchBox>
             <Carousel></Carousel>
             <InfiniteBox>

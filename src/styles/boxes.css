@@ -45,7 +45,7 @@
 }
 
 .strip {
-  height: 50px;
+  height: 40px;
   /* padding: 4px; */
 }
 
@@ -140,4 +140,12 @@
 
 .divide-10{
   width: 10%;
+}
+
+.border-color-red {
+  border-color: red;
+}
+
+.dropdown-pad {
+  padding: 0.06rem 0.3rem !important
 }

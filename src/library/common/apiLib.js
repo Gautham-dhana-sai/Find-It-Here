@@ -16,10 +16,17 @@ export class ApiLib {
       let response = null
       switch (METHOD) {
         case "GET":
-          body = this._encryptLib.encrypt({...body, project: null})
+          body = this._encryptLib.encrypt(body)
           break;
-        case "POST": 
+        case "LOGIN": 
           body = this._encryptLib.encrypt({...body, project: null})
+          response = await axios.post(url, body);
+          return this._encryptLib.decrypt(response.data);
+        case "POST": 
+          body = this._encryptLib.encrypt(body)
+          response = await axios.post(url, body);
+          return this._encryptLib.decrypt(response.data);
+        case "FILE_UPLOAD": 
           response = await axios.post(url, body);
           return this._encryptLib.decrypt(response.data);
         case "TPA-P":

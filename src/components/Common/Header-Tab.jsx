@@ -1,7 +1,14 @@
 import PropTypes from "prop-types"
 import "../../styles/boxes.css"
+import { useNavigate } from "react-router-dom"
 
-const HeaderTab = ({header}) => {
+const HeaderTab = ({header, route}) => {
+    const navigate = useNavigate()
+
+    const navigateTo = () => {
+        navigate(route)
+    }
+
     return (
         <>
             <div className="hero-sub m-bot-ne5">
@@ -17,7 +24,7 @@ const HeaderTab = ({header}) => {
                 </div>
                 <div className="divide-10">
                     <div className="icon-center m-top-15">
-                        <i className="fa-solid fa-circle-xmark fa-lg"></i>
+                        <i className="fa-solid fa-circle-xmark fa-lg cursor-pointer" onClick={navigateTo}></i>
                     </div>
                 </div>
             </div>
@@ -27,7 +34,8 @@ const HeaderTab = ({header}) => {
 }
 
 HeaderTab.propTypes = {
-    header: PropTypes.string
+    header: PropTypes.string,
+    route: PropTypes.string
 }
 
 export default HeaderTab

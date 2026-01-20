@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "../../styles/components/image-input.css"
+import PropTypes from "prop-types"
 
-const ImageInput = () => {
+const ImageInput = ({sendFileData, patchFile}) => {
 
     const [image, setImage] = useState(null)
 
@@ -14,11 +15,20 @@ const ImageInput = () => {
         } else if (!file.type.includes("image") || !file.size > 1024 * 1024 ) return
         const imageUrl = URL.createObjectURL(file)
         setImage(imageUrl)
+        sendFileData(file)
     }
 
     const removeFile = () => {
         setImage(null)
+        sendFileData(null)
     }
+
+    useEffect(() => {
+        let imageUrl = null
+        if(patchFile)
+            imageUrl = URL.createObjectURL(patchFile)
+        setImage(imageUrl)
+    }, [patchFile])
 
     return (
         <>
@@ -48,6 +58,11 @@ const ImageInput = () => {
             }
         </>
     )
+}
+
+ImageInput.propTypes = {
+    sendFileData: PropTypes.func,
+    patchFile: PropTypes.object
 }
 
 export default ImageInput

@@ -1,8 +1,9 @@
+import PropTypes from "prop-types"
 import "../../styles/components/reset-button.css"
-const ResetButton = () => {
+const ResetButton = ({resetClick}) => {
     return (
         <>
-            <button className="reset-button">
+            <button type="button" className="reset-button" onClick={resetClick}>
                 <span>
                     Reset
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
@@ -35,6 +36,10 @@ const ResetButton = () => {
             </button>
         </>
     )
+}
+
+ResetButton.propTypes = {
+    resetClick: PropTypes.func
 }
 
 export default ResetButton

@@ -1,8 +1,10 @@
+import PropTypes from "prop-types"
 import "../../styles/components/save-button.css"
-const SaveButton = () => {
+const SaveButton = ({saveClick}) => {
+
     return (
         <>
-            <button className="save-button">
+            <button type="button" className="save-button" onClick={saveClick}>
                 <div className="svg-wrapper-1">
                     <div className="svg-wrapper">
                     <svg
@@ -22,6 +24,10 @@ const SaveButton = () => {
             </button>
         </>
     )
+}
+
+SaveButton.propTypes = {
+    saveClick: PropTypes.func
 }
 
 export default SaveButton
