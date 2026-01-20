@@ -5,3 +5,7 @@
 .title-font{
     font-family: Copperplate, Papyrus, fantasy;
 }
+
+.cursor-pointer {
+    cursor: pointer
+}
