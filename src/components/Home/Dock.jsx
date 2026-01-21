@@ -9,6 +9,10 @@ const Dock = () => {
     navigate('/add-item')
   }
 
+  const supportPage = () => {
+    navigate('/support')
+  }
+
   return (
     <>
       <div className="sticky-dock">
@@ -84,6 +88,7 @@ const Dock = () => {
           </li>
           <li className="icon-content">
             <a
+              onClick={supportPage}
               aria-label="Contact"
               data-social="contact"
               className="link"

@@ -8,6 +8,7 @@ import HomePage from './components/Home/HomePage'
 import ContainerBox from './components/Common/Container-Box'
 import AddItemForm from './components/Forms/Add-Item-Form'
 import MainTitle from './components/Common/Main-Title'
+import Support from './components/Tabs/Support'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/home" element={<HomePage/>}></Route>
         <Route path="*" element={<HomePage/>}></Route>
         <Route path="/add-item" element={<AddItemForm/>}></Route>
+        <Route path="/support" element={<Support/>}></Route>
       </Routes>
       </BrowserRouter>
       <Outlet></Outlet>
