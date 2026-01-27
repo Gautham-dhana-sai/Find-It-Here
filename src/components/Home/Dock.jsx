@@ -1,16 +1,28 @@
+import { getSSToken } from "../../library/functions/sessionStorage";
 import "../../styles/dock.css";
 import { useNavigate } from "react-router-dom";
 
 const Dock = () => {
   const navigate = useNavigate()
 
-  const addItem = () => {
-    console.log('navigating')
-    navigate('/add-item')
-  }
-
-  const supportPage = () => {
-    navigate('/support')
+  const navigateTo = (tab) => {
+    if(tab === 'addItem' || tab === 'profile'){
+      if(!getSSToken()){
+        navigate('/login')
+        return
+      }
+    }
+    switch(tab){
+      case 'addItem':
+        navigate('/add-item')
+        break
+      case 'support':
+        navigate('/support')
+        break
+      case 'profile':
+        navigate('/profile')
+        break
+    }
   }
 
   return (
@@ -37,7 +49,7 @@ const Dock = () => {
           </li>
           <li className="icon-content">
             <a
-              onClick={addItem}
+              onClick={() => navigateTo('addItem')}
               aria-label="Add Item"
               data-social="Add Item"
               className="link"
@@ -64,6 +76,7 @@ const Dock = () => {
           </li>
           <li className="icon-content">
             <a
+              onClick={() => navigateTo('profile')}
               aria-label="Profile"
               data-social="profile"
               className="link"
@@ -88,7 +101,7 @@ const Dock = () => {
           </li>
           <li className="icon-content">
             <a
-              onClick={supportPage}
+              onClick={() => navigateTo('support')}
               aria-label="Contact"
               data-social="contact"
               className="link"

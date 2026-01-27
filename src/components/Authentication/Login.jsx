@@ -4,6 +4,7 @@ import PopUpModal from "../Common/PopUp-Modal";
 import { useNavigate } from "react-router-dom";
 import SparkButton from "../imports/Spark-Button";
 import Toggle from "../imports/Toggle";
+import { setSSToken, setSSUserId, setSSEmail, setSSUID } from "../../library/functions/sessionStorage";
 
 
 export function Login() {
@@ -48,8 +49,10 @@ export function Login() {
       console.log(response)
       if(response && response.success){
         if(response.data.login) {
-          sessionStorage.setItem("token", response.data.token)
-          sessionStorage.setItem("email", email)
+          setSSToken(response.data.token)
+          setSSEmail(email)
+          setSSUserId(response.data.userId)
+          setSSUID(response.data.user_id)
           navigate('/home')
         } else if (response.data.signup) {
           setOpenModal(true)
