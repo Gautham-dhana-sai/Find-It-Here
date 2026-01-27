@@ -1,5 +1,6 @@
 import axios from "axios";
 import { EncryptLib } from "./encryptLib";
+import { getSSToken } from "../functions/sessionStorage";
 
 export class ApiLib {
   constructor(encryptLib = new EncryptLib()) {
@@ -23,12 +24,24 @@ export class ApiLib {
           response = await axios.post(url, body);
           return this._encryptLib.decrypt(response.data);
         case "POST": 
-          body = this._encryptLib.encrypt(body)
-          response = await axios.post(url, body);
-          return this._encryptLib.decrypt(response.data);
+          { 
+            const token = getSSToken()
+            const headers = {
+              Authorization: `Bearer ${token}`
+            }
+            body = this._encryptLib.encrypt(body)
+            response = await axios.post(url, body, {headers});
+            return this._encryptLib.decrypt(response.data); 
+          }
         case "FILE_UPLOAD": 
-          response = await axios.post(url, body);
-          return this._encryptLib.decrypt(response.data);
+          {
+            const token = getSSToken()
+            const headers = {
+              Authorization: `Bearer ${token}`
+            }
+            response = await axios.post(url, body, {headers});
+            return this._encryptLib.decrypt(response.data);
+          }
         case "TPA-P":
           response = await axios.post(url, body);
           return response.data;

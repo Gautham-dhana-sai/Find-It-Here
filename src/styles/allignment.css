@@ -76,3 +76,8 @@
 .m-2{
     margin: 2px
 }
+
+.divide-2{
+    display: flex;
+    gap: 8px;
+}

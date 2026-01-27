@@ -11,7 +11,7 @@ const ThreeHoverTabs = () => {
             <p className="second-text">
               We value your feedback a lot, please provide your feedback at
               <br></br>
-              <strong>gouthamgoldgoutham@gmail.com</strong>
+              <strong>findithere.help@gmail.com</strong>
             </p>
           </div>
           <div className="hover-card green">
@@ -19,7 +19,7 @@ const ThreeHoverTabs = () => {
             <p className="second-text">
               Please take a minute and support us by suggesting something for being more user friendly at
               <br></br>
-              <strong>gouthamgoldgoutham@gmail.com</strong>
+              <strong>findithere.help@gmail.com</strong>
             </p>
           </div>
           <div className="hover-card red">
@@ -27,7 +27,7 @@ const ThreeHoverTabs = () => {
             <p className="second-text">
               Sorry for the trouble you have gone through if any, please feel free to drop a complaint at
               <br></br>
-              <strong>gouthamgoldgoutham@gmail.com</strong>
+              <strong>findithere.help@gmail.com</strong>
             </p>
           </div>
         </div>
