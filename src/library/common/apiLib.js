@@ -17,8 +17,14 @@ export class ApiLib {
       let response = null
       switch (METHOD) {
         case "GET":
-          body = this._encryptLib.encrypt(body)
-          break;
+          {
+            const token = getSSToken()
+            const headers = {
+              Authorization: `Bearer ${token}`
+            }
+            response = await axios.get(url, {headers})
+            return this._encryptLib.decrypt(response.data)
+          }
         case "LOGIN": 
           body = this._encryptLib.encrypt({...body, project: null})
           response = await axios.post(url, body);
