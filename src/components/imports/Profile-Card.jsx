@@ -3,7 +3,6 @@ import "../../styles/components/profile-card.css"
 import "../../styles/allignment.css"
 import { useEffect, useState } from "react";
 import { capitalizeFirst } from "../../library/functions/string";
-import { getSSUID } from "../../library/functions/sessionStorage";
 import { ProfileService } from "../../library/services/profile.service";
 
 const ProfileCard = ({profileData}) => {
@@ -22,10 +21,7 @@ const ProfileCard = ({profileData}) => {
   }, [])
 
   const getProfileItemsData = async () => {
-    const body = {
-      user: getSSUID()
-    }
-    const countsData = await profileService.getProfileItemsData(body)
+    const countsData = await profileService.getProfileItemsData()
     console.log(countsData)
     setItemData(countsData.data)
   }

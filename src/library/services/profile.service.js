@@ -12,8 +12,8 @@ export class ProfileService{
         return await this._apiLib.callApi(url, "POST", body)
     }
 
-    async getProfileItemsData(body) {
+    async getProfileItemsData() {
         const url = ProfileSettings.GET_PROFILE_ITEMS_DATA;
-        return await this._apiLib.callApi(url, "POST", body)
+        return await this._apiLib.callApi(url, "GET")
     }
 }
