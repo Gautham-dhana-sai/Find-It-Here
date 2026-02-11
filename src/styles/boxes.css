@@ -83,13 +83,14 @@
   position: relative;
 }
 
-.card::after {
+.card img {
   content: " ";
   position: absolute;
   inset: 2%;
   border: 2px solid #252525;
   /* margin-bottom: 40px; */
-  height: 135px
+  height: 135px;
+  width: 96%;
 }
 
 /* light dummy text (optional) */
@@ -108,6 +109,7 @@
   padding: 3px;
   border: 2px solid hsl(0, 0%, 51%);
   margin: 2px;
+  flex: 1
 }
 
 .sticky-header {
@@ -123,10 +125,15 @@
 
 .statement-block{
   display: block;
-  height: 30px;
+  height: 15px;
   width: 100%;
   font-size: x-small;
   overflow: auto
+}
+
+.title-block{
+  height: 24px;
+  overflow: auto;
 }
 
 .divider-line {

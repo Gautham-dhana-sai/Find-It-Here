@@ -18,9 +18,13 @@
 }
 
 .inner-scroll-area {
-  height: 100%;
-  overflow-y: auto; /* scroll inside only */
-  padding: 4px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    /* scroll inside only */
+    padding: 4px;
 }
 
 .container-shape{

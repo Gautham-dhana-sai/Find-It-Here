@@ -126,6 +126,7 @@
 .file-box {
   position: relative;
   /* width: 100px; */
+  max-width: 100px;
   height: 100px;
   background-color: #2a2a2a;
   border-radius: 8px;
