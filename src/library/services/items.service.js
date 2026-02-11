@@ -11,4 +11,9 @@ export class ItemsService{
         const url = ItemSettings.CREATE_ITEM;
         return await this._apiLib.callApi(url, "FILE_UPLOAD", body)
     }
+
+    async getItemsPaginate(body) {
+        const url = ItemSettings.GET_ITEMS_PAGINATE
+        return await this._apiLib.callApi(url, "POST", body)
+    }
 }

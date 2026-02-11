@@ -169,28 +169,23 @@ const AddItemForm = () => {
                             </div>
                         </div>
                         <div className="m-2 mb-3">
-                            <div className="col-md-6">
-                                <input type="number" className="form-control" value={pincode} placeholder="Pincode"
-                                    onChange={(event) => {setPincode(event.target.value)}} onBlur={() => {setPincodeBlur(true)}}/>
-                                <div className="">
-                                    {pincodeBlur && pincode.length === 0 && (<div className="form-text text-danger">Pincode is required</div>)}
-                                    {pincodeBlur && pincode.length !== 6 && (<div className="form-text text-danger">Pincode should be 6 digits</div>)}
+                                <div className="col-6">
+                                    <input type="number" className="form-control" value={pincode} placeholder="Pincode"
+                                        onChange={(event) => {setPincode(event.target.value)}} onBlur={() => {setPincodeBlur(true)}}/>
+                                    <div className="">
+                                        {pincodeBlur && pincode.length === 0 && (<div className="form-text text-danger">Pincode is required</div>)}
+                                        {pincodeBlur && pincode.length !== 6 && (<div className="form-text text-danger">Pincode should be 6 digits</div>)}
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                         <div className="m-2 mb-3">
                             <div className="col-md-6">
                                 <ImageInput sendFileData={imageData} patchFile={image}></ImageInput>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-md-5"></div>
-                            <div className="col-md-3">
-                                <ResetButton resetClick={resetClick}></ResetButton>
-                            </div>
-                            <div className="col-md-3">
-                                <SaveButton saveClick={saveclick}></SaveButton>
-                            </div>
+                        <div className="d-flex justify-content-end gap-3">
+                            <ResetButton resetClick={resetClick}></ResetButton>
+                            <SaveButton saveClick={saveclick}></SaveButton>
                         </div>
                     </form>
                 </InfiniteBox>
