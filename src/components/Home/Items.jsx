@@ -12,7 +12,7 @@ const Items = ({items}) => {
                     <ItemBox key={item._id} item={item}></ItemBox>
                 )}
             </section> 
-            : <section className="center-box">
+            : <section className="center-box max-height">
                 <Empty />
             </section>}
         </>

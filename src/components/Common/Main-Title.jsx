@@ -6,7 +6,7 @@ const MainTitle = () => {
           <div className="sticky-header">
             <section className="hero box">
               <div className="avatar box">
-                <i className="fa-solid fa-circle-user icon-3xl icon-std"></i>
+                <i className="fab fa-grav icon-3xl icon-std"></i>
               </div>
               <div className="hero-main">
                 <div className="title-font font-italic m-bot-ne5">Whatever you need!</div>
