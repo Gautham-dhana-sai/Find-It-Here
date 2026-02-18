@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Carousel from "../Common/Carousel"
 import InfiniteBox from "../Common/Infinite-Box"
 import LocationBox from "../Common/Location-Box"
@@ -13,14 +13,25 @@ const HomePage = () => {
     const [items, setItems] = useState([])
     const [location, setLocation] = useState({state: null, city: null})
     const [search, setSearch] = useState("")
+    const [nextCursor, setNextCursor] = useState(null)
+    const isFirstRender = useRef(true)
 
     useEffect(() => {
-        getItems()
+        if(isFirstRender.current) {
+            isFirstRender.current = false
+            return
+        }
+        getInitialItems()
     }, [location, search])
 
-    const getItems = async () => {
+    const getInitialItems = async () => {
+        const newItems = await getItems(null)
+        setItems(newItems)
+    }
+
+    const getItems = async (cursor) => {
         const body = {
-            paginationCursor: null,
+            paginationCursor: cursor,
             limit: 4,
             state: location?.state || null,
             city: location?.city || null,
@@ -28,8 +39,23 @@ const HomePage = () => {
         }
         console.log("Request body at getItems", body)
         const response = await itemsService.getItemsPaginate(body)
-        if(response.success) setItems(response.data)
-        else setItems([])
+        console.log("Response at getItems", response)
+        if(response.success) {
+            setNextCursor(response.nextCursor)
+            return response.data
+        } else {
+            return []
+        }
+    }
+
+    const fetchMoreItems = async () => {
+        console.log('fetchMore triggered')
+        if(!nextCursor && items.length) return
+        const newItems = await getItems(nextCursor)
+        setItems((prev) => [
+            ...prev,
+            ...newItems
+        ])
     }
 
     const userLocationData = (data) => {
@@ -44,9 +70,9 @@ const HomePage = () => {
         <>
             <LocationBox data={location} triggerLocation={userLocationData}></LocationBox>
             <SearchBox triggerSearch={searchData}></SearchBox>
-            <Carousel></Carousel>
-            <InfiniteBox>
-                <Items items={items}></Items>
+            <InfiniteBox dataLength={items.length} fetchMore={fetchMoreItems} hasMore={isFirstRender.current ? true : !!nextCursor}>
+                <Carousel></Carousel>
+                <Items items={items} loading={isFirstRender.current}></Items>
             </InfiniteBox>
             <Dock></Dock>
         </>

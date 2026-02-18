@@ -2,11 +2,11 @@ import PropTypes from "prop-types"
 import ItemBox from "../Common/Item-Box"
 import { Empty } from "antd"
 
-const Items = ({items}) => {
+const Items = ({items, loading}) => {
 
     return (
         <> 
-        {items.length 
+        {!loading && items.length 
             ? <section className="cards">
                 {items.map((item) => 
                     <ItemBox key={item._id} item={item}></ItemBox>
@@ -20,7 +20,8 @@ const Items = ({items}) => {
 }
 
 Items.propTypes = {
-    items: PropTypes.array
+    items: PropTypes.array,
+    loading: PropTypes.bool
 }
 
 export default Items
