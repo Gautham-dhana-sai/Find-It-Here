@@ -128,7 +128,7 @@
   height: 15px;
   width: 100%;
   font-size: x-small;
-  overflow: auto
+  overflow: hidden
 }
 
 .title-block{
