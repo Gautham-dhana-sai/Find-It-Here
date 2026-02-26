@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import HeaderTab from "../Common/Header-Tab"
 import InfiniteBox from "../Common/Infinite-Box"
 import SingleSelectDropdown from "../Common/Single-Select-Dropdown"
@@ -8,10 +8,14 @@ import SaveButton from "../imports/Save-Button"
 import ResetButton from "../imports/Reset-Button"
 import { ItemsService } from "../../library/services/items.service"
 import PopUpModal from "../Common/PopUp-Modal"
+import { CategoriesService } from "../../library/services/categories.service"
+import { BrandsService } from "../../library/services/brands.service"
 
 const AddItemForm = () => {
 
     const itemsService = new ItemsService()
+    const categoriesService = new CategoriesService()
+    const brandsService = new BrandsService()
 
     const loadingModal = {
         title: 'Loading',
@@ -57,6 +61,33 @@ const AddItemForm = () => {
     const [image, setImage] = useState(null)
     const [openModal, setOpenModal] = useState(false)
     const [modalData, setModalData] = useState(loadingModal)
+    const [categories, setCategories] = useState([])
+    const [category, setCategory] = useState({name: null, id: null})
+    const [brands, setBrands] = useState([])
+    const [brand, setBrand] = useState({name: null, id: null})
+
+    useEffect(() => {
+        getCategories()
+        // getBrands()
+    }, [])
+
+    useEffect(() => {
+        getBrands(category._id)
+    }, [category])
+
+    const getCategories = async () => {
+        const categories = await categoriesService.getCategories()
+        if(categories.success) {
+            setCategories(categories.data)
+        }
+    }
+
+    const getBrands = async () => {
+        const brands = await brandsService.getBrands({category: category._id})
+        if(brands.success) {
+            setBrands(brands.data)
+        }
+    }
 
     const userLocationData = (data) => {
         setLocation(data)
@@ -79,6 +110,8 @@ const AddItemForm = () => {
         setStore("")
         setStoreBlur(false)
         setImage(null)
+        setCategory({name: null, _id: null})
+        setBrand({name: null, _id: null})
     }
 
     const saveclick = async () => {
@@ -93,8 +126,8 @@ const AddItemForm = () => {
                 description: desc,
                 address,
                 pincode,
-                category: null, 
-                brand: null,
+                category: category._id, 
+                brand: brand && brand._id,
                 state: location.state,
                 city: location.city,
                 uploadedBy: 'admin'
@@ -119,6 +152,14 @@ const AddItemForm = () => {
 
     const imageData = (data) => {
         setImage(data)
+    }
+
+    const categorySelected = (data) => {
+        setCategory(data)
+    }
+
+    const brandSelected = (data) => {
+        setBrand(data)
     }
 
     return (
@@ -148,8 +189,8 @@ const AddItemForm = () => {
                         </div>
                         <div className="mb-3">
                             <div className="strip-half">
-                                <SingleSelectDropdown placeholder='Category'></SingleSelectDropdown>
-                                <SingleSelectDropdown placeholder='Brand'></SingleSelectDropdown>
+                                <SingleSelectDropdown selectItem={categorySelected} options={categories} display={category && category.name} placeholder='Category'></SingleSelectDropdown>
+                                <SingleSelectDropdown selectItem={brandSelected} options={brands} display={brand && brand.name} placeholder='Brand'></SingleSelectDropdown>
                             </div>
                         </div>
                         <div className="m-2 mb-3">

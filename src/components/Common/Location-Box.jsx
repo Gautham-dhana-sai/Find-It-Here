@@ -31,15 +31,15 @@ const LocationBox = ({triggerLocation, required, data}) => {
     }, [])
 
     useEffect(() => {
-        if(data.state !== state) setState(data.state)
+        if(data.state !== state) setState({name: data.state})
         if(data.city !== city) setCity(data.city)
     }, [data])
 
     const selectedState = async (item) => {
-        const response = await locationsService.getCitiesOfState({country: "India", state: item})
+        const response = await locationsService.getCitiesOfState({country: "India", state: item.name})
         setState(item)
         setCity(null)
-        triggerData(item, null)
+        triggerData(item.name, null)
         if(response?.data){
             setCities(response.data)
         }
@@ -47,7 +47,7 @@ const LocationBox = ({triggerLocation, required, data}) => {
 
     const selectedCity = (item) => {
         setCity(item)
-        triggerData(state, item)
+        triggerData(state.name, item)
     }
 
     const triggerData = (state, city) => {
