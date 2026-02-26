@@ -47,14 +47,16 @@ const SingleSelectDropdown = ({ placeholder, display, options, list, selectItem,
           <input type="checkbox" id={placeholder} className="select-toggle" checked={check} readOnly onClick={() => dropdownClicked()}/>
 
           <label htmlFor={placeholder} className="select-trigger">
-            <span className="selected-value">{display || placeholder}</span>
+            <span className="selected-value">
+              {(display && (typeof display === 'string' ? display : display.name)) || placeholder}
+            </span>
             <span className="chevron">▾</span>
           </label>
 
           <ul className="select-menu">
             {list?.length 
               ? list.map((name, index) => <li key={`${name}-${index}`} onClick={() => itemClicked(name)}>{name}</li>)
-              : options?.length && options.map((option) => <li key={option.state_code} onClick={() => itemClicked(option.name)}>{option.name}</li>)}
+              : options?.length && options.map((option) => <li key={option.state_code} onClick={() => itemClicked(option)}>{option.name}</li>)}
           </ul>
         </div>
       </div>
@@ -64,7 +66,10 @@ const SingleSelectDropdown = ({ placeholder, display, options, list, selectItem,
 
 SingleSelectDropdown.propTypes = {
     placeholder: PropTypes.string,
-    display: PropTypes.string,
+    display: PropTypes.string || PropTypes.shape({
+        _id: PropTypes.string,
+        name: PropTypes.string
+    }),
     options: PropTypes.array,
     list: PropTypes.array,
     required: PropTypes.bool,
