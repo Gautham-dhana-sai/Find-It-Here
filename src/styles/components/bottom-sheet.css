@@ -1,0 +1,61 @@
+/* Bottom sheet styles and transitions */
+.bottom-sheet-root {
+  /* when closed the root should not capture pointer events */
+  pointer-events: none;
+}
+
+.bottom-sheet-root .bottom-sheet-backdrop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none; /* disabled by default to avoid blocking page scroll when closed */
+}
+
+.bottom-sheet-root .bottom-sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background: #fff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  box-shadow: 0 -12px 30px rgba(0,0,0,0.15);
+  transform: translateY(100%);
+  transition: transform 320ms cubic-bezier(.2,.8,.2,1), height 320ms cubic-bezier(.2,.8,.2,1);
+  overflow: hidden;
+  pointer-events: auto;
+  /* ensure it can overlap the dock by using a high z-index when fixed inline styles are applied */
+  z-index: 11001;
+}
+
+.bottom-sheet-root.open {
+  pointer-events: auto; /* enable interactions only when open */
+}
+
+.bottom-sheet-root.open .bottom-sheet-panel {
+  /* prefer inline --sheet-max-height when provided, otherwise use 60vh */
+  height: 60vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translateY(0%);
+  /* when fixed, ensure the sheet overlaps any bottom dock */
+  will-change: transform;
+}
+
+.bottom-sheet-root.open .bottom-sheet-backdrop {
+  opacity: 1;
+  pointer-events: auto; /* enable backdrop clicks when open */
+}
+
+/* small screens: make it 85% to feel more natural */
+@media (max-width: 400px) {
+  .bottom-sheet-root.open .bottom-sheet-panel {
+    height: 85vh;
+  }
+}

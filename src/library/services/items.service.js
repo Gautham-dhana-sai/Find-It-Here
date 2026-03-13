@@ -16,4 +16,9 @@ export class ItemsService{
         const url = ItemSettings.GET_ITEMS_PAGINATE
         return await this._apiLib.callApi(url, "POST", body)
     }
+
+    async getItemData(body) {
+        const url = ItemSettings.GET_ITEM_DATA
+        return await this._apiLib.callApi(url, "POST", body)
+    }
 }
