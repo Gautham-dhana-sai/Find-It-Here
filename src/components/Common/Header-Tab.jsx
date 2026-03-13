@@ -2,11 +2,12 @@ import PropTypes from "prop-types"
 import "../../styles/boxes.css"
 import { useNavigate } from "react-router-dom"
 
-const HeaderTab = ({header, route}) => {
+const HeaderTab = ({header, route = '/', triggerClose}) => {
     const navigate = useNavigate()
 
     const navigateTo = () => {
         navigate(route)
+        triggerClose?.()
     }
 
     return (
@@ -18,9 +19,7 @@ const HeaderTab = ({header, route}) => {
                     </div>
                 </div>
                 <div className="divide-80 icon-center">
-                    <h3 className="title-font">
-                        {header}
-                    </h3>
+                    <h3 className="title-font" title={header}>{header}</h3>
                 </div>
                 <div className="divide-10">
                     <div className="icon-center m-top-15">
@@ -35,7 +34,8 @@ const HeaderTab = ({header, route}) => {
 
 HeaderTab.propTypes = {
     header: PropTypes.string,
-    route: PropTypes.string
+    route: PropTypes.string,
+    triggerClose: PropTypes.func
 }
 
 export default HeaderTab
