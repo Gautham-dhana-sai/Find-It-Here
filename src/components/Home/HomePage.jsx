@@ -19,6 +19,10 @@ const HomePage = () => {
     const [previewItem, setPreviewItem] = useState(null)
     const [sheetOpen, setSheetOpen] = useState(false)
 
+    useEffect(() => {
+        getInitialItems()
+    }, [])
+
     // get items (stable reference)
     const getItems = useCallback(async (cursor) => {
         const body = {
