@@ -1,12 +1,13 @@
 import PropTypes from "prop-types"
 import ItemBox from "../Common/Item-Box"
 import { Empty } from "antd"
+import PendulumLoader from "../imports/Pendulum-Loader"
 
 const Items = ({items, loading, onItemClick}) => {
 
     return (
         <> 
-        {!loading && items.length 
+        {items.length 
             ? <section className="cards">
                 {items.map((item) => 
                     <div key={item._id} onClick={() => onItemClick?.(item)}>
@@ -14,8 +15,8 @@ const Items = ({items, loading, onItemClick}) => {
                     </div>
                 )}
             </section> 
-            : <section className="center-box max-height">
-                <Empty />
+            : <section className="center-box items-max-height">
+                {loading ? <PendulumLoader /> : <Empty />}
             </section>}
         </>
     )
