@@ -4,8 +4,8 @@
     align-items: center;
 }
 
-.max-height{
-    height: 100% !important;
+.items-max-height{
+    height: 80% !important;
 }
 
 .modal-w500{

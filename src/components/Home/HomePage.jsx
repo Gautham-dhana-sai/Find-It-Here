@@ -18,6 +18,7 @@ const HomePage = () => {
     const isFirstRender = useRef(true)
     const [previewItem, setPreviewItem] = useState(null)
     const [sheetOpen, setSheetOpen] = useState(false)
+    const [loader, setLoader] = useState(true)
 
     useEffect(() => {
         getInitialItems()
@@ -33,6 +34,7 @@ const HomePage = () => {
             search: search || null
         }
         const response = await itemsServiceRef.current.getItemsPaginate(body)
+        setLoader(false)
         if(response && response.success) {
             setNextCursor(response.nextCursor)
             return response.data
@@ -97,7 +99,7 @@ const HomePage = () => {
             <SearchBox triggerSearch={searchData}></SearchBox>
             <InfiniteBox dataLength={items.length} fetchMore={fetchMoreItems} hasMore={isFirstRender.current ? true : !!nextCursor}>
                 <Carousel />
-                <Items items={items} loading={isFirstRender.current} onItemClick={openItemPreview} />
+                <Items items={items} loading={loader} onItemClick={openItemPreview} />
             </InfiniteBox>
             {!sheetOpen && <Dock />}
             {sheetOpen && previewItem && (
