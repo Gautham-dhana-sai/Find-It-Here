@@ -27,7 +27,7 @@ const HomePage = () => {
     const getItems = useCallback(async (cursor) => {
         const body = {
             paginationCursor: cursor,
-            limit: 4,
+            limit: 10,
             state: location?.state || null,
             city: location?.city || null,
             search: search || null
