@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import InfiniteScroll from "react-infinite-scroll-component"
+import PendulumLoader from "../imports/Pendulum-Loader"
 
 const InfiniteBox = ({children, fetchMore, hasMore, dataLength}) => {
 
@@ -15,8 +16,7 @@ const InfiniteBox = ({children, fetchMore, hasMore, dataLength}) => {
                         next={fetchMoreData}
                         dataLength={dataLength}
                         hasMore={hasMore}
-                        height={400}
-                        loader={<h4>Loading...</h4>}
+                        loader={<PendulumLoader />}
                     >
                         {children}
                     </InfiniteScroll>)
